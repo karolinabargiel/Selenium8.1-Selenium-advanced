@@ -1,0 +1,25 @@
+defaultEnvironment: test
+#defaultEnvironment: preprod
+
+environments:
+  test:
+    envName: test
+    appUrl: http://146.59.32.4/index.php/
+    eTitle: TesterSii
+    email: test@test.com
+    firstName: Testfirstname
+    lastName: Testlastname
+    password: password
+    birthDate: 02/20/1995
+    searchValue: HUMMINGBIRD
+
+  preprod:
+    envName: preprod
+    appUrl: https://logback.qos.ch/
+    eTitle: Logback Home
+
+browser:
+  browser: chrome
+  browserAttachScreenshot: false
+  headlessMode: false
+  browserTimeout: 20
