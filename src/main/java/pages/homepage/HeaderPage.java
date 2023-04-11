@@ -19,10 +19,15 @@ public class HeaderPage extends BasePage {
     private WebElement searchInput;
     @FindBy(css = "button[type='submit']")
     private WebElement searchBtn;
+
+    @FindBy(css = ".logo")
+    private WebElement logoBtn;
     @FindBy(css = "#ui-id-1 .product")
     private List<WebElement> searchDropdownList;
     @FindBy(css = "#top-menu > li")
     private List<WebElement> categories;
+    @FindBy(css = "#category-6")
+    private WebElement accessories;
 
     public void insertTextToSearch(String text) {
         click(searchInput);
@@ -49,6 +54,31 @@ public class HeaderPage extends BasePage {
 
     public int countResultsInDropdown() {
         return getSearchDropdownTexts().size();
+    }
+
+    public void openHomePage(){
+        click(logoBtn);
+    }
+
+    public void openCategoryByName(String categoryName) {
+        for (WebElement category : categories) {
+            if (category.getText().equals(categoryName)) {
+                click(category);
+                return;
+            }
+        }
+    }
+
+    public List<String> getCategoriesNames() {
+        List<String> categoriesNames = new ArrayList<>();
+        for (WebElement category : categories) {
+            categoriesNames.add(category.getText());
+        }
+        return categoriesNames;
+    }
+
+    public void openAccessoriesCategory() {
+        click(accessories);
     }
 
 

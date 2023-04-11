@@ -12,6 +12,9 @@ environments:
     password: password
     birthDate: 02/20/1995
     searchValue: HUMMINGBIRD
+    priceFilterLeft: 13
+    priceFilterRight: 15
+
 
   preprod:
     envName: preprod

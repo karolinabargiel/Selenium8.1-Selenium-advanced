@@ -10,6 +10,8 @@ import pages.base.BasePage;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ProductsListPage extends BasePage {
@@ -23,6 +25,13 @@ public class ProductsListPage extends BasePage {
     List<WebElement> productsNamesList;
     @FindBy(css = "div .price")
     List<WebElement> productsPricesList;
+    @FindBy(css = "#search_filters")
+    WebElement filtersSideMenu;
+    @FindBy(css = ".col-md-6.hidden-sm-down.total-products")
+    WebElement productCountLabel;
+
+
+
 
     public List<WebElement> getAllItems() {
         return productsNamesList;
@@ -82,6 +91,19 @@ public class ProductsListPage extends BasePage {
         return productsNamesList.get(0).getText();
     }
 
+    public WebElement getFilterBox() {
+        waitUntilFilterIsVisible();
+        return filtersSideMenu;
+    }
+
+    public void waitUntilFilterIsVisible() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#search_filters")));
+    }
+
+    public int getNumberOfProductsFromProductCountLabel() {
+        WebElement productCountLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".col-md-6.hidden-sm-down.total-products")));
+        return Integer.parseInt(productCountLabel.getText().replaceAll("\\D", ""));
+    }
 
 
 }
