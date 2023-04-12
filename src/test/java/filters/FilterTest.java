@@ -32,11 +32,11 @@ public class FilterTest extends TestBase {
     public void filterProductsInAccessoriesCategory() {
         BigDecimal lowestPrice = new BigDecimal(System.getProperty("priceFilterLeft"));
         BigDecimal highestPrice = new BigDecimal(System.getProperty("priceFilterRight"));
-        headerPage.openAccessoriesCategory();
+        headerPage.goToAccessoriesCategory();
         productsListPage.waitForProductsToLoad();
         int numOfProducts = productsListPage.getNumberOfProducts();
-        filterPage.moveLeftSliderToPrice(lowestPrice);
-        filterPage.moveRightSliderToPrice(highestPrice);
+        filterPage.moveLeftSlider(lowestPrice);
+        filterPage.moveRightSlider(highestPrice);
         List<BigDecimal> productPrices = productsListPage.getProductPrices();
         assertThat(productPrices).filteredOn(Objects::nonNull)
                 .allSatisfy(price -> assertThat(price).isBetween(lowestPrice, highestPrice));

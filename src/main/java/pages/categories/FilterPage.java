@@ -18,7 +18,7 @@ public class FilterPage extends BasePage {
     }
 
     @FindBy(css = ".faceted-slider p")
-    private WebElement priceFilterValues;
+    private WebElement priceFilter;
     @FindBy(css = ".ui-slider a:first-of-type")
     private WebElement leftSlider;
     @FindBy(css = ".ui-slider a:last-of-type")
@@ -26,11 +26,11 @@ public class FilterPage extends BasePage {
     @FindBy(css = ".js-search-filters-clear-all")
     private WebElement clearAllFilters;
 
-    public void moveLeftSliderToPrice(BigDecimal price) {
+    public void moveLeftSlider(BigDecimal price) {
         moveSlider("left", price);
     }
 
-    public void moveRightSliderToPrice(BigDecimal price) {
+    public void moveRightSlider(BigDecimal price) {
         moveSlider("right", price);
     }
 
@@ -72,18 +72,17 @@ public class FilterPage extends BasePage {
     }
 
     public BigDecimal getLeftSliderValue() {
-        return new BigDecimal(StringUtils.substringBetween(priceFilterValues.getText(), "$", " -"));
+        return new BigDecimal(StringUtils.substringBetween(priceFilter.getText(), "$", " -"));
     }
 
     public BigDecimal getRightSliderValue() {
-        return new BigDecimal(StringUtils.substringAfterLast(priceFilterValues.getText(), "$"));
+        return new BigDecimal(StringUtils.substringAfterLast(priceFilter.getText(), "$"));
     }
 
     public void clearFilters() {
         clearAllFilters.click();
         waitForFilteredPageToReload();
     }
-
 
 
 }

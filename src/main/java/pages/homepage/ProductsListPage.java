@@ -10,8 +10,6 @@ import pages.base.BasePage;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ProductsListPage extends BasePage {
@@ -45,9 +43,12 @@ public class ProductsListPage extends BasePage {
         click(getRandomItemFromList());
     }
 
-    public void openProductNamed(String productName){
+    public void openProductByName(String productName){
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".product-title")));
-        productsNamesList.stream().filter(product -> product.getText().equals(productName)).findFirst().ifPresent(WebElement::click);
+        productsNamesList.stream()
+                .filter(product -> product.getText().equals(productName))
+                .findFirst()
+                .ifPresent(WebElement::click);
     }
 
     public String getNameOfItemFrom(WebElement element) {

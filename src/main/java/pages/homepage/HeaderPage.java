@@ -28,6 +28,11 @@ public class HeaderPage extends BasePage {
     private List<WebElement> categories;
     @FindBy(css = "#category-6")
     private WebElement accessories;
+    @FindBy(css = "#category-9")
+    private WebElement artCategory;
+    @FindBy(css = "span.cart-products-count")
+    private WebElement cartIconQty;
+
 
     public void insertTextToSearch(String text) {
         click(searchInput);
@@ -77,8 +82,17 @@ public class HeaderPage extends BasePage {
         return categoriesNames;
     }
 
-    public void openAccessoriesCategory() {
+    public void goToAccessoriesCategory() {
         click(accessories);
+    }
+
+    public void goToArtCategory() {
+        wait.until(ExpectedConditions.elementToBeClickable(artCategory));
+        click(artCategory);
+    }
+
+    public String getCartIconQty() {
+        return cartIconQty.getText().replaceAll("\\D", "");
     }
 
 
