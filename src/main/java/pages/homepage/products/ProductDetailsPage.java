@@ -29,8 +29,8 @@ public class ProductDetailsPage extends BasePage {
     }
 
     public void setRandomQuantity(int min, int max) {
-        Random rand = new Random();
-        String randomQuantity = String.valueOf(rand.nextInt(max - min) + min);
+        Random random = new Random();
+        String randomQuantity = String.valueOf(random.nextInt(max - min) + min);
         clearAndInputText(quantity, randomQuantity);
     }
 

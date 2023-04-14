@@ -62,6 +62,7 @@ public class HeaderPage extends BasePage {
     }
 
     public void openHomePage(){
+        wait.until(ExpectedConditions.elementToBeClickable(logoBtn));
         click(logoBtn);
     }
 
@@ -93,6 +94,11 @@ public class HeaderPage extends BasePage {
 
     public String getCartIconQty() {
         return cartIconQty.getText().replaceAll("\\D", "");
+    }
+
+    public void goToCart() {
+        wait.until(ExpectedConditions.elementToBeClickable(cartIconQty));
+        click(cartIconQty);
     }
 
 

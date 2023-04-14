@@ -28,9 +28,6 @@ public class ProductsListPage extends BasePage {
     @FindBy(css = ".col-md-6.hidden-sm-down.total-products")
     WebElement productCountLabel;
 
-
-
-
     public List<WebElement> getAllItems() {
         return productsNamesList;
     }

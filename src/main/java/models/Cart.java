@@ -37,4 +37,12 @@ public class Cart {
     private void increaseTotalOrderCost(Product product) {
         totalOrderCost = totalOrderCost.add(BigDecimal.valueOf(product.getCount()).multiply(product.getPrice()));
     }
+
+    public BigDecimal getTotalOrderCost() {
+        return totalOrderCost;
+    }
+
+    public BigDecimal getTotalOrderCostWithShipping() {
+        return totalOrderCost.add(BigDecimal.valueOf(7));
+    }
 }

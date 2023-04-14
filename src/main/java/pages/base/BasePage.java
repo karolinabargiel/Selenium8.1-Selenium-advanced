@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
@@ -24,6 +25,11 @@ public class BasePage {
         this.driver = driver;
         wait = new WebDriverWait(driver, Long.parseLong(System.getProperty("browserTimeout")));
         actions = new Actions(driver);
+    }
+
+    public BasePage(WebDriver driver, WebElement element) {
+        this.driver = driver;
+        PageFactory.initElements(new DefaultElementLocatorFactory(element), this);
     }
 
     public void click(WebElement element) {
@@ -60,5 +66,9 @@ public class BasePage {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public double getProductPrice(WebElement webElement) {
+        return Double.parseDouble(webElement.getText().replace("$", ""));
     }
 }
