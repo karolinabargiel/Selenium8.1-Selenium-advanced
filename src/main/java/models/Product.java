@@ -1,14 +1,12 @@
 package models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import pages.cart.CartProduct;
-
 import java.math.BigDecimal;
 
+
 @Data
-public class Product {
+public class Product implements Comparable<Product>{
     private String productName;
     private BigDecimal price;
     private int count;
@@ -19,15 +17,7 @@ public class Product {
         this.count = count;
     }
 
-    public Product(String productName, BigDecimal price, BigDecimal totalPrice) {
-        this.productName = productName;
-        this.price = price;
-    }
 
-    public Product(String productName, BigDecimal price) {
-        this.productName = productName;
-        this.price = price;
-    }
 
     public Product(CartProduct cartProduct) {
         this.productName = cartProduct.getProductTitle();
@@ -35,4 +25,8 @@ public class Product {
         this.count = cartProduct.getQuantity();
     }
 
+    @Override
+    public int compareTo(Product other) {
+        return 0;
+    }
 }

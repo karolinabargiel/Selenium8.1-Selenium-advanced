@@ -34,11 +34,11 @@ public class CartProduct extends BasePage {
 
 
     public BigDecimal getProductPrice() {
-        return BigDecimal.valueOf(getProductPrice(productPrice));
+        return getProductPrice(productPrice);
     }
 
     public BigDecimal getSubTotalPrice() {
-        return BigDecimal.valueOf(getProductPrice(subTotalPrice));
+        return getProductPrice(subTotalPrice);
     }
 
     public int getQuantity() {
@@ -51,13 +51,4 @@ public class CartProduct extends BasePage {
         wait.until(ExpectedConditions.invisibilityOf(deleteIcon));
     }
 
-    @Override
-    public String toString() {
-        return "CartProduct{" +
-                "productTitle=" + productTitle.getText() +
-                ", productPrice=" + productPrice.getText() +
-                ", subTotalPrice=" + subTotalPrice.getText() +
-                ", quantity=" + quantity.getAttribute("textContext") +
-                '}';
-    }
 }

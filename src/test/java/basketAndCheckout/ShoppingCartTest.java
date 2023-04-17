@@ -7,16 +7,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pages.cart.CartPage;
 import pages.cart.CartPagePopup;
-import pages.cart.CartProduct;
 import pages.homepage.HeaderPage;
 import pages.homepage.ProductsListPage;
 import pages.homepage.products.ProductDetailsPage;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import static models.Cart.*;
 import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class ShoppingCartTest extends TestBase {
     public HeaderPage headerPage;
@@ -57,21 +57,24 @@ public class ShoppingCartTest extends TestBase {
     @Test
     public void addRandomProductsToCart() {
         Cart expectedCart = new Cart();
-        for (int i = 0; i<4; i++) {
+        for (int i = 0; i<10; i++) {
             productsListPage.openRandomProduct();
             productDetailsPage.setRandomQuantity(1, 5);
             productDetailsPage.addProductToCart(expectedCart);
             cartPagePopup.continueShopping();
             headerPage.openHomePage();
         }
-        System.out.println(expectedCart);
-        headerPage.goToCart();
-        System.out.println("Actual cart = " + cartPage.getItemsFromCart());
-        assertThat(cartPage.getTotalPrice()).isEqualTo(expectedCart.getTotalOrderCostWithShipping());
-        assertThat(cartPage.getItemsFromCart()).isEqualTo(expectedCart);
 
+        List<Product> sortedProductsInExpectedCart = getListOfProductsExpCart(expectedCart).stream().sorted(Comparator.comparing(Product::getProductName)).collect(Collectors.toList());
+        headerPage.goToCart();
+        List<Product> sortedProductsActualCart = cartPage.getItemsFromCart().getProducts().stream().sorted(Comparator.comparing(Product::getProductName)).collect(Collectors.toList());
+        assertThat(cartPage.getTotalPrice()).isEqualTo(expectedCart.getTotalOrderCostWithShipping());
+        assertThat(sortedProductsActualCart).isEqualTo(sortedProductsInExpectedCart);
 
     }
+
+
+
 
 
 }

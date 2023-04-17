@@ -68,7 +68,7 @@ public class BasePage {
 
     }
 
-    public double getProductPrice(WebElement webElement) {
-        return Double.parseDouble(webElement.getText().replace("$", ""));
+    public BigDecimal getProductPrice(WebElement webElement) {
+        return new BigDecimal(webElement.getText().replace("$", ""));
     }
 }

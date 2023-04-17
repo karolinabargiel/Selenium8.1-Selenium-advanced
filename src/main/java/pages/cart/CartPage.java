@@ -2,7 +2,6 @@ package pages.cart;
 
 import models.Cart;
 import models.Product;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,16 +18,11 @@ public class CartPage extends BasePage {
     public CartPage(WebDriver driver) {
         super(driver);
     }
-    @FindBy(css = ".product-line-info > a")
-    private WebElement productName;
-    @FindBy(css = "span.product-price")
-    private WebElement productPrice;
+
     @FindBy(css = "div[class='cart-summary-line cart-total'] span[class='value']")
     private WebElement totalPrice;
     @FindBy(css = ".cart-item")
     private List<WebElement> cartList;
-    @FindBy(css = "#cart-subtotal-products .value")
-    private WebElement totalItemsPrice;
     @FindBy(css = ".js-cart > .no-items")
     private WebElement emptyCartLabel;
     @FindBy(css = ".cart-detailed-actions .btn-primary")

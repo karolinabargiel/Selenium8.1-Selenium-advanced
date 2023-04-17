@@ -35,7 +35,7 @@ public class SearchTest extends TestBase {
     public void searchDropdownResults() {
         headerPage.insertTextToSearch(System.getProperty("searchValue"));
         List<String> searchDropdownTexts = headerPage.getSearchDropdownTexts();
-        assertThat(searchDropdownTexts).allMatch(x -> x.contains(System.getProperty("searchValue")));
+        assertThat(searchDropdownTexts).allMatch(results -> results.contains(System.getProperty("searchValue")));
 
     }
 

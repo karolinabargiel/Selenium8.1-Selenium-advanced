@@ -1,27 +1,31 @@
 package models;
 
 import lombok.Data;
+import pages.cart.CartPage;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Data
 public class Cart {
     private List<Product> products = new ArrayList<>();
     private BigDecimal totalOrderCost = BigDecimal.valueOf(0);
 
-    public Cart(List<Product> products, BigDecimal totalOrderCost) {
+    public Cart(List<Product> products) {
         this.products = products;
-        this.totalOrderCost = totalOrderCost;
+
     }
 
     public Cart() {
     }
 
     public Product getProduct(String productName){
-        return products.stream().filter(prod -> Objects.equals(prod.getProductName(), productName)).findFirst().orElse(null);
+        for (Product product : products) {
+            if (Objects.equals(product.getProductName(), productName)) {
+                return product;
+            }
+        }
+        return null;
     }
     public void addProduct(Product product) {
         if (products.size() == 0 || products.stream().anyMatch(prod -> !Objects.equals(prod.getProductName(), product.getProductName()))){
@@ -30,7 +34,12 @@ public class Cart {
             return;
         }
 
-        products.stream().filter(prod -> Objects.equals(prod.getProductName(), product.getProductName())).findFirst().ifPresent(prod -> prod.setCount(prod.getCount() + 1));
+        for (Product product1 : products) {
+            if (Objects.equals(product1.getProductName(), product1.getProductName())) {
+                product1.setCount(product1.getCount() + 1);
+                break;
+            }
+        }
         increaseTotalOrderCost(product);
     }
 
@@ -45,4 +54,35 @@ public class Cart {
     public BigDecimal getTotalOrderCostWithShipping() {
         return totalOrderCost.add(BigDecimal.valueOf(7));
     }
+
+    public static Cart getUniqueProducts(Cart expectedCart) {
+        Map<String, Product> productMap = new HashMap<>();
+        for (Product product : expectedCart.getProducts()) {
+            String productName = product.getProductName();
+            if (productMap.containsKey(productName)) {
+                Product existingProduct = productMap.get(productName);
+                existingProduct.setCount(existingProduct.getCount() + product.getCount());
+            } else {
+                productMap.put(productName, new Product(productName, product.getPrice(), product.getCount()));
+            }
+        }
+        List<Product> uniqueProducts = new ArrayList<>(productMap.values());
+        BigDecimal totalOrderCost = expectedCart.getTotalOrderCost();
+        Cart cartWithUniqueProducts = new Cart();
+        cartWithUniqueProducts.setProducts(uniqueProducts);
+        cartWithUniqueProducts.setTotalOrderCost(totalOrderCost);
+        return cartWithUniqueProducts;
+    }
+
+    public static List<Product> getListOfProductsExpCart(Cart expectedCart) {
+        return getUniqueProducts(expectedCart).getProducts();
+    }
+
+//    public static List<Product> getListOfProductActCart(CartPage cartPage) {
+//        return cartPage.getItemsFromCart().getProducts();
+//    }
+
+
+
+
 }
