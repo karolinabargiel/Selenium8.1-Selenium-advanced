@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pages.cart.CartPage;
 import pages.cart.CartPagePopup;
+import pages.cart.CartProduct;
 import pages.homepage.HeaderPage;
 import pages.homepage.ProductsListPage;
 import pages.homepage.products.ProductDetailsPage;
@@ -24,6 +25,7 @@ public class ShoppingCartTest extends TestBase {
     public ProductDetailsPage productDetailsPage;
     public CartPagePopup cartPagePopup;
     public CartPage cartPage;
+    public CartProduct cartProduct;
 
     @BeforeEach
     public  void testSetup() {
@@ -32,6 +34,7 @@ public class ShoppingCartTest extends TestBase {
         productDetailsPage = new ProductDetailsPage(driver);
         cartPagePopup = new CartPagePopup(driver);
         cartPage = new CartPage(driver);
+        cartProduct = new CartProduct(driver);
     }
 
     @Test
@@ -64,7 +67,6 @@ public class ShoppingCartTest extends TestBase {
             cartPagePopup.continueShopping();
             headerPage.openHomePage();
         }
-
         List<Product> sortedProductsInExpectedCart = getListOfProductsExpCart(expectedCart).stream().sorted(Comparator.comparing(Product::getProductName)).collect(Collectors.toList());
         headerPage.goToCart();
         List<Product> sortedProductsActualCart = cartPage.getItemsFromCart().getProducts().stream().sorted(Comparator.comparing(Product::getProductName)).collect(Collectors.toList());
@@ -73,8 +75,24 @@ public class ShoppingCartTest extends TestBase {
 
     }
 
-
-
-
+    @Test
+    public void removeProductsFromCart() {
+        Cart expectedCart = new Cart();
+        for (int i = 0; i<2; i++) {
+            productsListPage.openRandomProduct();
+            productDetailsPage.addProductToCart(expectedCart);
+            cartPagePopup.continueShopping();
+            headerPage.openHomePage();
+        }
+        headerPage.goToCart();
+        assertThat(cartPage.getTotalPrice()).isEqualTo(expectedCart.getTotalOrderCostWithShipping());
+        String productRemovedFromCart = cartPage.deleteItem(0);
+        expectedCart.checkDeletedProducts(productRemovedFromCart);
+        assertThat(cartPage.getTotalPrice()).isEqualTo(expectedCart.getTotalOrderCostWithShipping());
+        productRemovedFromCart = cartPage.deleteItem(0);
+        expectedCart.checkDeletedProducts(productRemovedFromCart);
+        assertThat(cartPage.getTotalPrice()).isEqualTo(expectedCart.getTotalOrderCost());
+        assertThat(cartPage.getEmptyCartLabel()).isEqualTo("There are no more items in your cart");
+    }
 
 }

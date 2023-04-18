@@ -29,6 +29,7 @@ public class BasePage {
 
     public BasePage(WebDriver driver, WebElement element) {
         this.driver = driver;
+        wait = new WebDriverWait(driver, Long.parseLong(System.getProperty("browserTimeout")));
         PageFactory.initElements(new DefaultElementLocatorFactory(element), this);
     }
 

@@ -20,11 +20,15 @@ public class CartProduct extends BasePage {
     private WebElement subTotalPrice;
     @FindBy(css = "input[name='product-quantity-spin']")
     private WebElement quantity;
-    @FindBy(css = ".cart-line-product-actions")
-    private WebElement deleteIcon;
+    @FindBy(css = ".cart-items .cart-item:nth-of-type(1) .cart-line-product-actions")
+    private WebElement removeFromCartBtn;
 
     public CartProduct(WebDriver driver, WebElement element) {
         super(driver, element);
+    }
+
+    public CartProduct(WebDriver driver) {
+        super(driver);
     }
 
 
@@ -46,9 +50,10 @@ public class CartProduct extends BasePage {
     }
 
     public void deleteItem() {
-        WebElement deleteIcon = driver.findElement(By.cssSelector(".cart-items .cart-item:nth-of-type(1) .cart-line-product-actions"));
-        deleteIcon.click();
-        wait.until(ExpectedConditions.invisibilityOf(deleteIcon));
+        //WebElement deleteIcon = driver.findElement(By.cssSelector(".cart-items .cart-item:nth-of-type(1) .cart-line-product-actions"));
+        //wait.until(ExpectedConditions.elementToBeClickable(removeFromCartBtn));
+        removeFromCartBtn.click();
+        wait.until(ExpectedConditions.invisibilityOf(removeFromCartBtn));
     }
 
 }

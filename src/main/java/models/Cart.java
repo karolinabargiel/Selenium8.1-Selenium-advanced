@@ -1,10 +1,10 @@
 package models;
 
 import lombok.Data;
-import pages.cart.CartPage;
 
 import java.math.BigDecimal;
 import java.util.*;
+
 
 @Data
 public class Cart {
@@ -78,11 +78,17 @@ public class Cart {
         return getUniqueProducts(expectedCart).getProducts();
     }
 
-//    public static List<Product> getListOfProductActCart(CartPage cartPage) {
-//        return cartPage.getItemsFromCart().getProducts();
-//    }
-
-
+    public Cart checkDeletedProducts(String productName) {
+        for (Iterator<Product> iter = products.iterator(); iter.hasNext();) {
+            Product product = iter.next();
+            if (product.getProductName().equals(productName)) {
+                iter.remove();
+                totalOrderCost = totalOrderCost.subtract(product.getPrice());
+                return this;
+            }
+        }
+        return null;
+    }
 
 
 }
