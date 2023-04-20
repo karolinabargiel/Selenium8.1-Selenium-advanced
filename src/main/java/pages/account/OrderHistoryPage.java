@@ -12,6 +12,7 @@ public class OrderHistoryPage extends BasePage {
     public OrderHistoryPage(WebDriver driver) {
         super(driver);
     }
+
     @FindBy(css = "tbody > tr")
     private List<WebElement> listOfOrders;
 

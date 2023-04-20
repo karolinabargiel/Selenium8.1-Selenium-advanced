@@ -1,6 +1,7 @@
 package models;
 
 import java.text.SimpleDateFormat;
+
 import com.github.javafaker.Faker;
 
 public class UserFactory {

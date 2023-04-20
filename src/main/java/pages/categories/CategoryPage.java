@@ -17,11 +17,8 @@ public class CategoryPage extends BasePage {
 
 
     public String getCategoryName() {
-        waitUntilCategoryIsVisible();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".h1")));
         return categoryName.getText();
     }
 
-    public void waitUntilCategoryIsVisible() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".h1")));
-    }
 }

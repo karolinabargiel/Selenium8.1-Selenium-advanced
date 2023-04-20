@@ -48,5 +48,4 @@ public class ProductDetailsPage extends BasePage {
     }
 
 
-
 }

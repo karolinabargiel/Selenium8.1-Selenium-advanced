@@ -13,8 +13,6 @@ public class OrderHistoryRow extends BasePage {
         super(driver, element);
     }
 
-    @FindBy(css = "th")
-    private WebElement orderReference;
     @FindBy(css = "td:nth-child(2)")
     private WebElement orderDate;
     @FindBy(css = "td:nth-child(3)")
@@ -28,11 +26,12 @@ public class OrderHistoryRow extends BasePage {
     public String getOrderDate() {
         return orderDate.getText();
     }
+
     public String getStatus() {
         return status.getText();
     }
 
-    public BigDecimal getTotalPrice(){
+    public BigDecimal getTotalPrice() {
         wait.until(ExpectedConditions.visibilityOf(totalPrice));
         return getPrice(totalPrice);
     }

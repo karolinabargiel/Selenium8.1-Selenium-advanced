@@ -36,35 +36,26 @@ public class CartPagePopup extends BasePage {
     @FindBy(css = ".cart-content-btn .btn-primary")
     private WebElement proceedToCheckoutBtn;
 
-    public void continueShopping(){
+    public void continueShopping() {
         wait.until(ExpectedConditions.elementToBeClickable(continueShoppingBtn));
         click(continueShoppingBtn);
     }
+
     public String getCartAmountInfo() {
         return cartAmountInfo.getText();
     }
 
-    public String getProductName(){
+    public String getProductName() {
         wait.until(ExpectedConditions.visibilityOf(productName));
         return productName.getText();
     }
 
-    public BigDecimal getProductPrice(){
+    public BigDecimal getProductPrice() {
         wait.until(ExpectedConditions.visibilityOf(productPrice));
         return getPrice(productPrice);
     }
 
-    public BigDecimal getSubtotalPrice(){
-        wait.until(ExpectedConditions.visibilityOf(subtotalPrice));
-        return getPrice(subtotalPrice);
-    }
-
-    public BigDecimal getShippingPrice(){
-        wait.until(ExpectedConditions.visibilityOf(shipping));
-        return getPrice(shipping);
-    }
-
-    public BigDecimal getTotalPrice(){
+    public BigDecimal getTotalPrice() {
         wait.until(ExpectedConditions.visibilityOf(totalPrice));
         return getPrice(totalPrice);
     }

@@ -62,15 +62,11 @@ public class BasePage {
         File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
         try {
-            FileUtils.copyFile(src, new File("src/main/resources/" + System.currentTimeMillis()+" screenshot.png"));
+            FileUtils.copyFile(src, new File("src/main/resources/" + System.currentTimeMillis() + " screenshot.png"));
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
-    }
-
-    public BigDecimal getProductPrice(WebElement webElement) {
-        return new BigDecimal(webElement.getText().replace("$", ""));
     }
 
     public String getTextAfterColon(WebElement webElement) {

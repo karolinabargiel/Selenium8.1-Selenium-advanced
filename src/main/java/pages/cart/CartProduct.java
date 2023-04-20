@@ -1,6 +1,5 @@
 package pages.cart;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,8 +15,6 @@ public class CartProduct extends BasePage {
     private WebElement productTitle;
     @FindBy(css = "[class] .current-price")
     private WebElement productPrice;
-    @FindBy(css = "strong")
-    private WebElement subTotalPrice;
     @FindBy(css = "input[name='product-quantity-spin']")
     private WebElement quantity;
     @FindBy(css = ".cart-items .cart-item:nth-of-type(1) .cart-line-product-actions")
@@ -38,11 +35,7 @@ public class CartProduct extends BasePage {
 
 
     public BigDecimal getProductPrice() {
-        return getProductPrice(productPrice);
-    }
-
-    public BigDecimal getSubTotalPrice() {
-        return getProductPrice(subTotalPrice);
+        return getPrice(productPrice);
     }
 
     public int getQuantity() {

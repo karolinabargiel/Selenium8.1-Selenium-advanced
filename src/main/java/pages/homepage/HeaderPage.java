@@ -59,11 +59,7 @@ public class HeaderPage extends BasePage {
         return searchDropdownTexts;
     }
 
-    public int countResultsInDropdown() {
-        return getSearchDropdownTexts().size();
-    }
-
-    public void openHomePage(){
+    public void openHomePage() {
         wait.until(ExpectedConditions.elementToBeClickable(logoBtn));
         click(logoBtn);
     }

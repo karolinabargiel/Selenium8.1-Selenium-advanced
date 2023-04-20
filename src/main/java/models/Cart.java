@@ -11,15 +11,10 @@ public class Cart {
     private List<Product> products = new ArrayList<>();
     private BigDecimal totalOrderCost = BigDecimal.valueOf(0);
 
-    public Cart(List<Product> products) {
-        this.products = products;
-
-    }
-
     public Cart() {
     }
 
-    public Product getProduct(String productName){
+    public Product getProduct(String productName) {
         for (Product product : products) {
             if (Objects.equals(product.getProductName(), productName)) {
                 return product;
@@ -27,8 +22,9 @@ public class Cart {
         }
         return null;
     }
+
     public void addProduct(Product product) {
-        if (products.size() == 0 || products.stream().anyMatch(prod -> !Objects.equals(prod.getProductName(), product.getProductName()))){
+        if (products.size() == 0 || products.stream().anyMatch(prod -> !Objects.equals(prod.getProductName(), product.getProductName()))) {
             products.add(product);
             increaseTotalOrderCost(product);
             return;
@@ -79,7 +75,7 @@ public class Cart {
     }
 
     public Cart checkDeletedProducts(String productName) {
-        for (Iterator<Product> iter = products.iterator(); iter.hasNext();) {
+        for (Iterator<Product> iter = products.iterator(); iter.hasNext(); ) {
             Product product = iter.next();
             if (product.getProductName().equals(productName)) {
                 iter.remove();

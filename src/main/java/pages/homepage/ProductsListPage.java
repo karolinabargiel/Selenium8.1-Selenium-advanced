@@ -10,23 +10,21 @@ import pages.base.BasePage;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class ProductsListPage extends BasePage {
     public ProductsListPage(WebDriver driver) {
         super(driver);
     }
 
-    @FindBy(css = "[itemprop='item']")
-    List<WebElement> productsList;
+
     @FindBy(css = ".product-title")
     List<WebElement> productsNamesList;
     @FindBy(css = "div .price")
     List<WebElement> productsPricesList;
     @FindBy(css = "#search_filters")
     WebElement filtersSideMenu;
-    @FindBy(css = ".col-md-6.hidden-sm-down.total-products")
-    WebElement productCountLabel;
+
 
     public List<WebElement> getAllItems() {
         return productsNamesList;
@@ -36,11 +34,11 @@ public class ProductsListPage extends BasePage {
         return getRandomElement(productsNamesList);
     }
 
-    public void openRandomProduct(){
+    public void openRandomProduct() {
         click(getRandomItemFromList());
     }
 
-    public void openProductByName(String productName){
+    public void openProductByName(String productName) {
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".product-title")));
         productsNamesList.stream()
                 .filter(product -> product.getText().equals(productName))
@@ -60,10 +58,6 @@ public class ProductsListPage extends BasePage {
         return getAllItems().size();
     }
 
-
-    public List<String> getAllItemsName() {
-        return productsNamesList.stream().map(WebElement::getText).collect(Collectors.toList());
-    }
 
     public void waitForProductsToLoad() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#products")));

@@ -1,30 +1,16 @@
 package categories;
 
-import base.TestBase;
-import org.junit.jupiter.api.BeforeEach;
+import base.Pages;
 import org.junit.jupiter.api.Test;
-import pages.categories.CategoryPage;
-import pages.homepage.HeaderPage;
-import pages.homepage.ProductsListPage;
+
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
+public class CategoriesTest extends Pages {
 
-public class CategoriesTest extends TestBase {
-    public HeaderPage headerPage;
-    public CategoryPage categoryPage;
-    public ProductsListPage productsListPage;
-
-    @BeforeEach
-    public  void testSetup() {
-        headerPage = new HeaderPage(driver);
-        categoryPage = new CategoryPage(driver);
-        productsListPage = new ProductsListPage(driver);
-
-    }
 
     @Test
     public void openEachMainCategory() {
