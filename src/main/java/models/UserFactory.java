@@ -16,17 +16,14 @@ public class UserFactory {
                 .build();
     }
 
-    public User getAlreadyRegisteredUser() {
+    public static User getAlreadyRegisteredUser() {
         return new User.Builder()
                 .setFirstName(System.getProperty("firstName"))
                 .setLastName(System.getProperty("lastName"))
-                .setEmail(System.getProperty("email"))
-                .setPassword(System.getProperty("password"))
-                .setBirthDate(System.getProperty("birthDate"))
                 .build();
     }
 
-    public User getAlreadyRegisteredUserCredentials() {
+    public static User getAlreadyRegisteredUserCredentials() {
         String email = System.getProperty("email");
         String password = System.getProperty("password");
         return new User.Builder()

@@ -50,8 +50,6 @@ public class CartProduct extends BasePage {
     }
 
     public void deleteItem() {
-        //WebElement deleteIcon = driver.findElement(By.cssSelector(".cart-items .cart-item:nth-of-type(1) .cart-line-product-actions"));
-        //wait.until(ExpectedConditions.elementToBeClickable(removeFromCartBtn));
         removeFromCartBtn.click();
         wait.until(ExpectedConditions.invisibilityOf(removeFromCartBtn));
     }

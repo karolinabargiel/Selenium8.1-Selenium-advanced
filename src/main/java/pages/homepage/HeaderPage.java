@@ -32,6 +32,8 @@ public class HeaderPage extends BasePage {
     private WebElement artCategory;
     @FindBy(css = "span.cart-products-count")
     private WebElement cartIconQty;
+    @FindBy(css = "div#_desktop_user_info .hidden-sm-down")
+    private WebElement signInBtn;
 
 
     public void insertTextToSearch(String text) {
@@ -99,6 +101,10 @@ public class HeaderPage extends BasePage {
     public void goToCart() {
         wait.until(ExpectedConditions.elementToBeClickable(cartIconQty));
         click(cartIconQty);
+    }
+
+    public void goToLogin() {
+        signInBtn.click();
     }
 
 

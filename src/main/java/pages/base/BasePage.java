@@ -72,4 +72,8 @@ public class BasePage {
     public BigDecimal getProductPrice(WebElement webElement) {
         return new BigDecimal(webElement.getText().replace("$", ""));
     }
+
+    public String getTextAfterColon(WebElement webElement) {
+        return webElement.getText().split(":")[1].strip();
+    }
 }

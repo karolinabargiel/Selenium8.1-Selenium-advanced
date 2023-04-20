@@ -33,6 +33,8 @@ public class CartPagePopup extends BasePage {
 
     @FindBy(css = ".btn-secondary")
     private WebElement continueShoppingBtn;
+    @FindBy(css = ".cart-content-btn .btn-primary")
+    private WebElement proceedToCheckoutBtn;
 
     public void continueShopping(){
         wait.until(ExpectedConditions.elementToBeClickable(continueShoppingBtn));
@@ -65,5 +67,11 @@ public class CartPagePopup extends BasePage {
     public BigDecimal getTotalPrice(){
         wait.until(ExpectedConditions.visibilityOf(totalPrice));
         return getPrice(totalPrice);
+    }
+
+    public CartPage proceedToCheckoutOrder() {
+        wait.until(ExpectedConditions.visibilityOf(proceedToCheckoutBtn));
+        proceedToCheckoutBtn.click();
+        return new CartPage(driver);
     }
 }

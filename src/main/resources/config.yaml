@@ -11,6 +11,11 @@ environments:
     lastName: Testlastname
     password: password
     birthDate: 02/20/1995
+    address: Test 222
+    city: Warszawa
+    zipCode: 01-100
+    orderHistoryUrl: http://146.59.32.4/index.php?controller=history
+
     searchValue: HUMMINGBIRD
     priceFilterLeft: 13
     priceFilterRight: 15
